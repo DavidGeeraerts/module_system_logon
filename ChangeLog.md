@@ -21,12 +21,13 @@
 
 ---
 
-## Version 1.0.0 (2019-12-13)
-#### Added
-- Initialized project
-
+### Version 1.0.1 (2020-02-21)
+#### Changed
+- Readme file
 
 
 ---
 
-
+### Version 1.0.0 (2019-12-13)
+#### Added
+- Initialized project

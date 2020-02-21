@@ -30,8 +30,8 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 SET Name=module_logon
-SET Version=1.0.0
-SET BUILD=2019-12-13 0743
+SET Version=1.0.1
+SET BUILD=2020-02-21 0812
 Title %Name% Version: %Version%
 Prompt mL$G
 color 8F
@@ -53,6 +53,7 @@ SET $Log=module_logon.log
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Make sure temp directories exist
+::	write to temp first, then over network.
 IF NOT EXIST "%TEMP%\var" MD "%TEMP%\var"
 
 :: Headers
