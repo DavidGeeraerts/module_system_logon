@@ -30,8 +30,8 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 SET Name=module_logon
-SET Version=1.0.1
-SET BUILD=2020-02-21 0812
+SET Version=1.1.0
+SET BUILD=2021-10-08 0715
 Title %Name% Version: %Version%
 Prompt mL$G
 color 8F
@@ -57,7 +57,7 @@ SET $Log=module_logon.log
 IF NOT EXIST "%TEMP%\var" MD "%TEMP%\var"
 
 :: Headers
-:: ISO-Date ; Time ; Computer ; User ; User-UPN ; FullName
+:: ISO-Date ; Time ; Computer ; User ; User-UPN ; FullName ; SessionName
 
 :: Get ISO-Date
 @powershell Get-Date -format "yyyy-MM-dd" > "%TEMP%\var\var_ISO8601_Date.txt"
@@ -70,12 +70,16 @@ FOR /F "skip=3 tokens=2 delims=^=" %%P IN ('wmic NETLOGIN GET FullName /Value') 
 whoami /UPN > "%TEMP%\var\var_User_UPN.txt"
 SET /P $USER_UPN= < "%TEMP%\var\var_User_UPN.txt"
 
+:: Get SessionName
+FOR /F "skip=1 tokens=2 delims= " %%P IN ('query user') DO echo %%P> "%TEMP%\var\var_SessionName.txt"
+SET /P $USER_SESSIONNAME= < "%TEMP%\var\var_SessionName.txt"
+
 :: remove the leading space in TIME
 for /f "delims=. " %%P IN ("%TIME%") do echo %%P> "%TEMP%\var\var_Time.txt"
 SET /P $TIME= < "%TEMP%\var\var_Time.txt"
 
 :: Write out to log
-IF EXIST "%$LogPath%" ECHO %$ISO_DATE%;%$TIME%;%COMPUTERNAME%;%USERNAME%;%$USER_UPN%;%$FULLNAME% >> "%$LogPath%\%$Log%"
+IF EXIST "%$LogPath%" ECHO %$ISO_DATE%;%$TIME%;%COMPUTERNAME%;%$USER_SESSIONNAME%;%USERNAME%;%$USER_UPN%;%$FULLNAME% >> "%$LogPath%\%$Log%"
 
 :EOF
 ENDLOCAL
