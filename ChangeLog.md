@@ -21,12 +21,21 @@
 
 ---
 
-### Version 1.1.0 (2021-10-08)
+### Version 1.2.1 (2021-10-08)
 #### Added
-- SessionName
+- write to log locally
+
+#### Changed
+- Logging server
+- variables with pre "$"
+
 
 ---
 
+
+### Version 1.1.0 (2021-10-08)
+#### Added
+- SessionName
 
 ### Version 1.0.1 (2020-02-21)
 #### Changed
