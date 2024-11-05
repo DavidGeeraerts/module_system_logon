@@ -1,4 +1,4 @@
-# module_Logon
+# module_system_logon
 
 ## Description
 Logon module is intended to capture logon onto a computer.

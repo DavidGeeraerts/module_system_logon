@@ -1,4 +1,4 @@
-# Changelog project: Logon Module
+# Changelog project: module system logon
 ***A Windows module for collecting usage metrics***
 
 ---
@@ -21,6 +21,13 @@
 
 ---
 
+### Version 1.3.0 (2024-11-05)
+#### Changed
+- use powershell to get user full name.
+
+---
+
+
 ### Version 1.2.1 (2021-10-08)
 #### Added
 - write to log locally
@@ -28,9 +35,6 @@
 #### Changed
 - Logging server
 - variables with pre "$"
-
-
----
 
 
 ### Version 1.1.0 (2021-10-08)

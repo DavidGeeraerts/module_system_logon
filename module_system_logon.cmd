@@ -29,9 +29,9 @@
 @SETLOCAL enableextensions
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-SET $Name=module_logon
-SET $Version=1.2.0
-SET $BUILD=2021-10-08 0745
+SET $Name=module_system_logon
+SET $Version=1.3.0
+SET $BUILD=20241105 0830
 Title %$Name% Version: %$Version%
 Prompt mL$G
 color 8F
@@ -68,7 +68,10 @@ IF NOT EXIST "%APPDATA%\%$Name%\%$Log%" echo # %$HEADERS% > "%APPDATA%\%$Name%\%
 SET /P $ISO_DATE= < "%TEMP%\var\var_ISO8601_Date.txt"
 
 :: Get User full name
-FOR /F "skip=3 tokens=2 delims=^=" %%P IN ('wmic NETLOGIN GET FullName /Value') DO SET "$FULLNAME=%%P"
+:: WMIC is getting deprecated
+::FOR /F "skip=3 tokens=2 delims=^=" %%P IN ('wmic NETLOGIN GET FullName /Value') DO SET "$FULLNAME=%%P"
+@powershell -command "(Get-WmiObject -Class Win32_NetworkLoginProfile | Select-Object -Property FullName)"> "%TEMP%\var\Full_Name.txt"
+FOR /F "skip=3 tokens=1 delims=" %%P IN (%TEMP%\var\Full_Name.txt) DO SET "$FULLNAME=%%P"
 
 :: Get User UPN
 whoami /UPN > "%TEMP%\var\var_User_UPN.txt"
