@@ -30,8 +30,8 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 SET $Name=module_system_logon
-SET $Version=1.3.0
-SET $BUILD=20241105 0830
+SET $Version=1.3.1
+SET $BUILD=20241231 0845
 Title %$Name% Version: %$Version%
 Prompt mL$G
 color 8F
@@ -48,7 +48,7 @@ color 8F
 SET $Log=module_logon.log
 
 ::	Logging server to ship log
-SET $LogPath=\\Sc-Vanadium\Logs\module_Logon
+SET $LogPath=\\Sc-Tellus\Logs\module_Logon
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::##### Everything below here is 'hard-coded' [DO NOT MODIFY] #####
@@ -90,7 +90,7 @@ ECHO %$ISO_DATE%;%$TIME%;%COMPUTERNAME%;%$SESSIONNAME%;%USERNAME%;%$USER_UPN%;%$
 :: Write out to logging server
 IF EXIST "%$LogPath%" ECHO %$ISO_DATE%;%$TIME%;%COMPUTERNAME%;%$SESSIONNAME%;%USERNAME%;%$USER_UPN%;%$FULLNAME% >> "%$LogPath%\%$Log%"
 
-:EOF
+:End
 ENDLOCAL
 EXIT
 
