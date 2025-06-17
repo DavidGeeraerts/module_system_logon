@@ -30,8 +30,8 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 SET $Name=module_system_logon
-SET $Version=1.3.1
-SET $BUILD=20241231 0845
+SET $Version=1.3.2
+SET $BUILD=20250617 1330
 Title %$Name% Version: %$Version%
 Prompt mL$G
 color 8F
@@ -71,7 +71,9 @@ SET /P $ISO_DATE= < "%TEMP%\var\var_ISO8601_Date.txt"
 :: WMIC is getting deprecated
 ::FOR /F "skip=3 tokens=2 delims=^=" %%P IN ('wmic NETLOGIN GET FullName /Value') DO SET "$FULLNAME=%%P"
 @powershell -command "(Get-WmiObject -Class Win32_NetworkLoginProfile | Select-Object -Property FullName)"> "%TEMP%\var\Full_Name.txt"
-FOR /F "skip=3 tokens=1 delims=" %%P IN (%TEMP%\var\Full_Name.txt) DO SET "$FULLNAME=%%P"
+IF EXIST "%TEMP%\var\Full_Name_cleaned.txt" del /F /Q "%TEMP%\var\Full_Name_cleaned.txt"
+FOR /F "skip=6 tokens=1 delims=" %%P IN (%TEMP%\var\Full_Name.txt) DO echo>> "%TEMP%\var\Full_Name_cleaned.txt"
+SET /P $FULLNAME= < "%TEMP%\var\Full_Name_cleaned.txt"
 
 :: Get User UPN
 whoami /UPN > "%TEMP%\var\var_User_UPN.txt"

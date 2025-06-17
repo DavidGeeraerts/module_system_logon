@@ -21,12 +21,15 @@
 
 ---
 
-### Version 1.3.0 (2024-11-05)
-#### Changed
-- use powershell to get user full name.
+### Version 1.3.1 (2025-06-17)
+#### Fixed
+- get user full name.
 
 ---
 
+### Version 1.3.0 (2024-11-05)
+#### Changed
+- use powershell to get user full name.
 
 ### Version 1.2.1 (2021-10-08)
 #### Added

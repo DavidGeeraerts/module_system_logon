@@ -1,0 +1,1 @@
+for /f %%P IN ('dir /B C:\Users') Do for /f "skip=1 delims=" %%R IN (C:\Users\%%P\AppData\Roaming\module_system_logon\module_logon.log) Do FINDSTR /C:"%%R" "\\SC-Tellus\Logs\module_Logon\module_logon.log" 2> nul || echo %%R>> "\\SC-Tellus\Logs\module_Logon\Orphaned_module_logon.txt"
