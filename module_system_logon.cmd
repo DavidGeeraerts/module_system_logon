@@ -72,7 +72,7 @@ SET /P $ISO_DATE= < "%TEMP%\var\var_ISO8601_Date.txt"
 ::FOR /F "skip=3 tokens=2 delims=^=" %%P IN ('wmic NETLOGIN GET FullName /Value') DO SET "$FULLNAME=%%P"
 @powershell -command "(Get-WmiObject -Class Win32_NetworkLoginProfile | Select-Object -Property FullName)"> "%TEMP%\var\Full_Name.txt"
 IF EXIST "%TEMP%\var\Full_Name_cleaned.txt" del /F /Q "%TEMP%\var\Full_Name_cleaned.txt"
-FOR /F "skip=6 tokens=1 delims=" %%P IN (%TEMP%\var\Full_Name.txt) DO echo>> "%TEMP%\var\Full_Name_cleaned.txt"
+FOR /F "skip=6 tokens=1 delims=" %%P IN (%TEMP%\var\Full_Name.txt) DO echo %%P >> "%TEMP%\var\Full_Name_cleaned.txt"
 SET /P $FULLNAME= < "%TEMP%\var\Full_Name_cleaned.txt"
 
 :: Get User UPN
