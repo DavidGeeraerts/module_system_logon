@@ -71,9 +71,13 @@ SET /P $ISO_DATE= < "%TEMP%\var\var_ISO8601_Date.txt"
 :: WMIC is getting deprecated
 ::FOR /F "skip=3 tokens=2 delims=^=" %%P IN ('wmic NETLOGIN GET FullName /Value') DO SET "$FULLNAME=%%P"
 @powershell -command "(Get-WmiObject -Class Win32_NetworkLoginProfile | Select-Object -Property FullName)"> "%TEMP%\var\Full_Name.txt"
-IF EXIST "%TEMP%\var\Full_Name_cleaned.txt" del /F /Q "%TEMP%\var\Full_Name_cleaned.txt"
-FOR /F "skip=6 tokens=1 delims=" %%P IN (%TEMP%\var\Full_Name.txt) DO echo %%P >> "%TEMP%\var\Full_Name_cleaned.txt"
-SET /P $FULLNAME= < "%TEMP%\var\Full_Name_cleaned.txt"
+IF EXIST "%TEMP%\var\Full_Name_dirty.txt" del /F /Q "%TEMP%\var\Full_Name_dirty.txt"
+FOR /F "skip=4 tokens=1 delims=" %%P IN (%TEMP%\var\Full_Name.txt) DO echo %%P >> "%TEMP%\var\Full_Name_dirty.txt"
+findstr /v /C:"ECHO is off." "%Temp%\var\Full_Name_dirty.txt" > "%TEMP%\var\Full_Name_clean.txt"
+REM Some full name queries have additional text as additional lines.
+:: FOR /F "tokens=1 delims=" %%P IN (%TEMP%\var\Full_Name_clean.txt) DO SET $FULLNAME=%%P
+:: This will only take the first line and ignore additional lines
+SET /P $FULLNAME= < "%TEMP%\var\Full_Name_clean.txt"
 
 :: Get User UPN
 whoami /UPN > "%TEMP%\var\var_User_UPN.txt"
