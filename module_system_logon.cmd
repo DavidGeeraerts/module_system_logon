@@ -30,8 +30,8 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 SET $Name=module_system_logon
-SET $Version=1.3.2
-SET $BUILD=20250617 1330
+SET $Version=1.3.3
+SET $BUILD=20250731 1230
 Title %$Name% Version: %$Version%
 Prompt mL$G
 color 8F
@@ -83,8 +83,11 @@ SET /P $FULLNAME= < "%TEMP%\var\Full_Name_clean.txt"
 whoami /UPN > "%TEMP%\var\var_User_UPN.txt"
 SET /P $USER_UPN= < "%TEMP%\var\var_User_UPN.txt"
 
+:: Get the active user
+query user | find ">"> "%TEMP%\var\var_Active_User.txt"
+
 :: Get SessionName
-FOR /F "skip=1 tokens=2 delims= " %%P IN ('query user') DO echo %%P> "%TEMP%\var\var_SessionName.txt"
+FOR /F "tokens=2 delims= " %%P IN (%TEMP%\var\var_Active_User.txt) DO echo %%P> "%TEMP%\var\var_SessionName.txt"
 SET /P $SESSIONNAME= < "%TEMP%\var\var_SessionName.txt"
 
 :: remove the leading space in TIME

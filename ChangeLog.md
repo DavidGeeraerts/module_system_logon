@@ -21,11 +21,16 @@
 
 ---
 
+### Version 1.3.3 (2025-07-30)
+#### Fixed
+- get active user session
+
+---
+
+
 ### Version 1.3.1 (2025-06-17)
 #### Fixed
 - get user full name.
-
----
 
 ### Version 1.3.0 (2024-11-05)
 #### Changed
